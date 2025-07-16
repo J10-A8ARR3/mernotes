@@ -1,6 +1,5 @@
 import { PlusIcon } from "lucide-react";
 import { Link } from "react-router";
-import React from "react";
 
 const Navbar = () => {
   return (
