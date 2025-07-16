@@ -59,6 +59,4 @@ npm run dev
 * Make sure MongoDB and Redis credentials are correctly set in the `.env` file.
 * This project uses **Vite** for frontend and **Express.js** with **MongoDB** and **Upstash Redis** for backend.
 
----
 
-Happy coding! 🚀
