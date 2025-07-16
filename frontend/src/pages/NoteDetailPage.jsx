@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router";
-import { ArrowLeftIcon, Trash2Icon } from "lucide-react";
-import toast, { LoaderIcon } from "react-hot-toast";
-
+import { useEffect } from "react";
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router";
 import api from "../lib/axios";
+import toast from "react-hot-toast";
+import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from "lucide-react";
 
 const NoteDetailPage = () => {
   const [note, setNote] = useState(null);
@@ -20,7 +20,7 @@ const NoteDetailPage = () => {
         const res = await api.get(`/notes/${id}`);
         setNote(res.data);
       } catch (error) {
-        console.log("Error in fetchinNote", error);
+        console.log("Error in fetching note", error);
         toast.error("Failed to fetch the note");
       } finally {
         setLoading(false);
@@ -35,13 +35,14 @@ const NoteDetailPage = () => {
 
     try {
       await api.delete(`/notes/${id}`);
-      toast.success("Note Deleted");
+      toast.success("Note deleted");
       navigate("/");
     } catch (error) {
-      console.log("Error in deleting note:", error);
+      console.log("Error deleting the note:", error);
       toast.error("Failed to delete note");
     }
   };
+
   const handleSave = async () => {
     if (!note.title.trim() || !note.content.trim()) {
       toast.error("Please add a title or content");
@@ -52,10 +53,10 @@ const NoteDetailPage = () => {
 
     try {
       await api.put(`/notes/${id}`, note);
-      toast.success("Note update successfully");
+      toast.success("Note updated successfully");
       navigate("/");
     } catch (error) {
-      console.log("Error in saving the note:", error);
+      console.log("Error saving the note:", error);
       toast.error("Failed to update note");
     } finally {
       setSaving(false);
@@ -123,7 +124,7 @@ const NoteDetailPage = () => {
                   disabled={saving}
                   onClick={handleSave}
                 >
-                  {saving ? "Saving ..." : "Save Changers"}
+                  {saving ? "Saving..." : "Save Changes"}
                 </button>
               </div>
             </div>
@@ -133,5 +134,4 @@ const NoteDetailPage = () => {
     </div>
   );
 };
-
 export default NoteDetailPage;
