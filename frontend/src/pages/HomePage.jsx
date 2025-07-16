@@ -20,8 +20,8 @@ const HomePage = () => {
         setNotes(res.data);
         setIsRateLimited(false);
       } catch (error) {
-        console.log("Error Fetching Notes");
-        console.log(error);
+        console.log("Error fetching notes");
+        console.log(error.response);
         if (error.response?.status === 429) {
           setIsRateLimited(true);
         } else {
@@ -43,9 +43,7 @@ const HomePage = () => {
 
       <div className="max-w-7xl mx-auto p-4 mt-6">
         {loading && (
-          <div className="text-center text-primary py-10">
-            Loading notes....
-          </div>
+          <div className="text-center text-primary py-10">Loading notes...</div>
         )}
 
         {notes.length === 0 && !isRateLimited && <NotesNotFound />}
@@ -61,5 +59,4 @@ const HomePage = () => {
     </div>
   );
 };
-
 export default HomePage;
